@@ -4,14 +4,15 @@ supercharged arangodb poc client.
 
 Fastango is up to 3x (save docs) and 4x (get docs) as fast as the official ArangoDB JavaScript client when it runs with TCP connection reusage and up to 6x (save docs) and 8x (get docs) as fast as the untouched version (3.3.0).
 
+![bildschirmfoto 2015-03-10 um 23 10 36](https://cloud.githubusercontent.com/assets/1494154/6588054/449f6c46-c784-11e4-9a58-6aaac94b2fd6.png)
+![bildschirmfoto 2015-03-12 um 23 29 28](https://cloud.githubusercontent.com/assets/1494154/6630478/742df1f6-c911-11e4-80b4-97afaf7138c6.png)
+
 # impelentation status
 
 ## drawbacks
 - not the full http api is implemented
 - all request go into the same queue. on socket error this queue will resubmited to the db -> split queue to pipelined an non pipelined requests
 - no cursor iteration (possbile when async functions land in in ES7)
-
-
 
 ## initialize client
 ```coffeescript
