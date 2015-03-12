@@ -9,7 +9,7 @@
     "client",
     "API"
   ],
-  "version": "1.0.0-beta0",
+  "version": "1.0.0-beta1",
   "author": {
     "name": "Manuel Baesler",
     "email": "baslr.at.github@gmail.com"
