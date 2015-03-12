@@ -1,6 +1,8 @@
 fastango
 ========
-supercharged arangodb poc client. Fastango is up to 3x (save docs) and 4x (get docs) as fast as the official ArangoDB JavaScript client when it runs with TCP connection reusage and up to 6x (save docs) and 8x (get docs) as fast as the untouched version (3.3.0).
+supercharged arangodb poc client.
+
+Fastango is up to 3x (save docs) and 4x (get docs) as fast as the official ArangoDB JavaScript client when it runs with TCP connection reusage and up to 6x (save docs) and 8x (get docs) as fast as the untouched version (3.3.0).
 
 # impelentation status
 
