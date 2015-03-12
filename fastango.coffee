@@ -136,7 +136,13 @@ fastango = (parser, currentDb, cb) ->
       obj[colName].document = (_key, cb) ->
         parser.get this.urls['GET_DOC']+_key, cb
 
-      obj[colName].update  = (_key, str, cb) -> cb 501
+      obj[colName].update  = (_key, str, opts, cb) ->
+        if typeof opts is 'function'
+          cb   = opts
+          opts = {}
+        urlStr = '?'
+        urlStr += "#{i}=#{n}&" for i,n of opts
+        parser.patch this.urls['GET_DOC']+_key+urlStr, new Buffer(str, 'utf8'), cb
 
       obj[colName].replace = (_key, cb) -> cb 501
 

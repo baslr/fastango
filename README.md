@@ -60,6 +60,14 @@ fastango.testCollection.save JSON.strinigfy({key:'value'}), (status, heads, body
     'some error'
 ```
 
+### update
+```coffeescript
+fastango.testCollection.update '_key', JSON.strinigfy({key:'value'}), {options}, (status, heads, body) ->
+  if status >= 400
+    'some error'
+```
+for options (optional) see <https://docs.arangodb.com/HttpDocument/WorkingWithDocuments.html> (Patch document)
+
 ### document
 ```coffeescript
 fastango.testCollection.document '_key', (status, heads, body) ->

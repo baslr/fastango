@@ -194,7 +194,6 @@
     };
 
     ParserV2.prototype._put = function(_, url, buf) {
-      console.log("PUT: " + url);
       if (buf) {
         this.socket.write("PUT " + url + " HTTP/1.1\r\nContent-Type: application/json\r\ncontent-length: " + buf.length + "\r\n\r\n");
         return this.socket.write(buf, 'binary');
@@ -218,6 +217,23 @@
 
     ParserV2.prototype._delete = function(_, url) {
       return this.socket.write("DELETE " + url + " HTTP/1.1\r\n\r\n", 'ascii');
+    };
+
+
+    /*
+        PATCH
+     */
+
+    ParserV2.prototype.patch = function(url, buf, cb) {
+      this.queue.push(['_patch', url, buf, cb]);
+      if (!this.connected) {
+        return this.reconnect();
+      }
+      return this._patch(0, url, buf);
+    };
+
+    ParserV2.prototype._patch = function(_, url, buf) {
+      return this._writeRequest('PATCH ', url, buf);
     };
 
     ParserV2.prototype._writeRequest = function(method, url, buf) {

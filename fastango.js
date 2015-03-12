@@ -166,8 +166,18 @@
       obj[colName].document = function(_key, cb) {
         return parser.get(this.urls['GET_DOC'] + _key, cb);
       };
-      obj[colName].update = function(_key, str, cb) {
-        return cb(501);
+      obj[colName].update = function(_key, str, opts, cb) {
+        var i, n, urlStr;
+        if (typeof opts === 'function') {
+          cb = opts;
+          opts = {};
+        }
+        urlStr = '?';
+        for (i in opts) {
+          n = opts[i];
+          urlStr += i + "=" + n + "&";
+        }
+        return parser.patch(this.urls['GET_DOC'] + _key + urlStr, new Buffer(str, 'utf8'), cb);
       };
       obj[colName].replace = function(_key, cb) {
         return cb(501);
@@ -206,12 +216,12 @@
       };
     };
     parser.get("/_db/" + currentDb + "/_api/collection?excludeSystem=true", function(status, headers, body) {
-      var col, collections, e, i, len, ref;
+      var col, collections, e, j, len, ref;
       collections = JSON.parse(body);
       try {
         ref = collections.collections;
-        for (i = 0, len = ref.length; i < len; i++) {
-          col = ref[i];
+        for (j = 0, len = ref.length; j < len; j++) {
+          col = ref[j];
           setupCollection(col.name);
         }
       } catch (_error) {

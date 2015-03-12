@@ -162,7 +162,6 @@ class ParserV2
     @_put 0, url, buf
 
   _put: (_, url, buf) ->
-    console.log "PUT: #{url}"
     if buf
       @socket.write "PUT #{url} HTTP/1.1\r\nContent-Type: application/json\r\ncontent-length: #{buf.length}\r\n\r\n"
       @socket.write  buf, 'binary'
@@ -181,6 +180,16 @@ class ParserV2
   _delete: (_, url) ->
     @socket.write "DELETE #{url} HTTP/1.1\r\n\r\n", 'ascii'
 
+  ###
+      PATCH
+  ###
+  patch: (url, buf, cb) ->
+    @queue.push ['_patch', url, buf, cb]
+    return @reconnect() if ! @connected
+    @_patch 0, url, buf
+
+  _patch: (_, url, buf) ->
+    @_writeRequest 'PATCH ', url, buf
 
 
 
