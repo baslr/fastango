@@ -9,7 +9,7 @@ Fastango is up to 3x (save docs) and 4x (get docs) as fast as the official Arang
 
 ## [Collection functions](#collections)
 ## [Document functions](#documents)
-## [Misc](#misc)
+## [Misc functions](#misc)
 
 # impelentation status
 
